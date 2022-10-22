@@ -110,3 +110,12 @@ class Game:
     def reveal(self):
         print("Correct Word: " + self.word)
 
+#EXECUTION STARTS HERE
+
+game = Game() #create a Game object
+
+while not game.isFinished(): #loop until the game finished
+    game.play() #play
+
+game.play() #play
+game.reveal() #reveal the correct word
