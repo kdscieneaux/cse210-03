@@ -1,0 +1,19 @@
+#import for random number
+import random
+
+#class 1 to store words list
+class Word:
+#init method
+    def __init__(self):
+    #words list
+        self.wordlist = ["apple", "hello", "swimming", "dancing", "laptop",
+        "computer", "window", "curtain", "oange", "fan"]
+        #total words in the list
+        self.wordCount = 10
+
+    #randomly get a word from the list
+    def getRandomWord(self):
+    #generate random index within the range of word list
+        i = random.randint(0, self.wordCount - 1)
+        #return the word at the index
+        return self.wordlist[i]
