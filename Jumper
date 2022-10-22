@@ -58,3 +58,55 @@ class Console:
         letter = input("Guess a letter [a - z]: ") #get letter
         return letter #return letter
 
+#class 4 to manage the game
+class Game:
+    #init game
+    def __init__(self):
+        self.words = Word() #create word object
+        self.jumper = Jumper() # create Jumper object
+        self.console = Console() #create Console object
+
+        self.word = self.words.getRandomWord() #int with a random word
+        self.guess = "" #init guessed word as empty
+
+        for i in range(len(self.word)):
+            self.guess += "-" #fill guessed word all '-' character
+        self.finished = False #set as game not over
+
+    #make a guess
+    def play(self):
+        print("\n" + self.guess) #print current guessed word
+        self.jumper.draw() #print jumper diagram
+        if not self.finished: #not finished the game
+            guessLetter = self.console.getUserGuess() #get a letter
+        changed = self.updateGuess(guessLetter) #check for correctness
+        if not changed: #wrong guess
+            self.jumper.reduce() #update jumper image
+
+    #check for correctness of guess
+    def updateGuess(self, guessLetter):
+        changed = False #assume as wrong guess
+        for i in range(len(self.word)): #match with all letters of word
+            if self.word[i] == guessLetter and self.guess[i] == "-":
+            #there is a character match
+                self.guess = self.guess[0:i] + guessLetter + self.guess[i + 1:]
+                changed = True #indicate as a correct guess
+                return changed #return the status
+
+    #check if the game over
+    def isFinished(self):
+        self.finished = True #assume that game is over
+        for i in range(len(self.guess)): #check if all letters guessed
+            if self.guess[i] == '-': #atleast one letter not guessed
+                self.finished = False #set as game is not over
+            if self.finished or self.jumper.finished():
+            #exhausted all incorrect guesses
+                self.finished = True #mark as geme over
+                return True #return game over
+            else:
+                return False #return game not over
+
+    #reveal the correct word to the user
+    def reveal(self):
+        print("Correct Word: " + self.word)
+
