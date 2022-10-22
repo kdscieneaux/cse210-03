@@ -17,3 +17,37 @@ class Word:
         i = random.randint(0, self.wordCount - 1)
         #return the word at the index
         return self.wordlist[i]
+        
+#class 2 to manage jumper image
+class Jumper:
+#init method
+    def __init__(self):
+    #jumper image stored in a list
+        self.jumper = [" ___ ",
+        " /___\ ",
+        " \ / ",
+        " \ / ",
+        " 0 ",
+        " /|\ ",
+        " / \ ",
+        " ",
+        "^^^^^^^"]
+
+    #print jumper diagram
+    def draw(self):
+        for line in self.jumper:
+            print(line)
+
+    #update for a wrong guess
+    def reduce(self):
+        self.jumper = self.jumper[1:] #remove 0th row of jumper image
+        if len(self.jumper) == 5:
+            self.jumper[0] = " X ";
+
+    #check if exhausted all wrong guess
+    def finished(self):
+        if len(self.jumper) == 5: #jumper image list has only 5 rows
+            return True #game over
+        else:
+            return False #game not over
+
