@@ -51,3 +51,10 @@ class Jumper:
         else:
             return False #game not over
 
+#class 3 to manage user inputs
+class Console:
+    #get a guessed letter from user
+    def getUserGuess(self):
+        letter = input("Guess a letter [a - z]: ") #get letter
+        return letter #return letter
+
